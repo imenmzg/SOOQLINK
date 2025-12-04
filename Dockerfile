@@ -55,7 +55,8 @@ RUN mkdir -p /var/www/html/storage/framework/cache/data \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Install PHP dependencies (with more memory for composer)
-RUN COMPOSER_MEMORY_LIMIT=-1 composer install --optimize-autoloader --no-dev --no-interaction --prefer-dist
+# Ignore platform requirements for packages that work fine on PHP 8.3
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --optimize-autoloader --no-dev --no-interaction --prefer-dist --ignore-platform-req=php
 
 # Set proper ownership
 RUN chown -R www-data:www-data /var/www/html
