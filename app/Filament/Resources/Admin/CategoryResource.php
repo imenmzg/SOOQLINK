@@ -9,9 +9,12 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Resources\Concerns\Translatable;
 
 class CategoryResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
@@ -19,6 +22,11 @@ class CategoryResource extends Resource
     protected static ?string $navigationGroup = 'Products';
 
     protected static ?int $navigationSort = 2;
+
+    public static function getTranslatableLocales(): array
+    {
+        return ['ar', 'en', 'fr'];
+    }
 
     public static function form(Form $form): Form
     {
@@ -28,11 +36,16 @@ class CategoryResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Illuminate\Support\Str::slug($state))),
+                    ->afterStateUpdated(function ($state, Forms\Set $set, $livewire) {
+                        if ($livewire->activeLocale === 'ar') {
+                            $set('slug', \Illuminate\Support\Str::slug($state));
+                        }
+                    }),
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255)
-                    ->unique(ignoreRecord: true),
+                    ->unique(ignoreRecord: true)
+                    ->helperText('Generated from Arabic name'),
                 Forms\Components\Textarea::make('description')
                     ->rows(3),
                 Forms\Components\TextInput::make('icon')

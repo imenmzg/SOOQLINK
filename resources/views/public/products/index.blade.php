@@ -16,16 +16,16 @@
                         <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
                         <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
                     </svg>
-                    منتجات عالية الجودة
+                    {{ __('products.page_badge') }}
                 </div>
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-4">
-                    <span style="color: #32A7E2;">المنتجات</span> المتاحة
+                    <span style="color: #32A7E2;">{{ __('products.page_title') }}</span>
                 </h1>
                 <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
                     @if($products->count() > 0)
-                        اكتشف {{ $products->count() }} منتج متاح من موردين موثوقين
+                        {{ __('products.page_subtitle', ['count' => $products->count()]) }}
                     @else
-                        ابدأ بإضافة منتجاتك الأولى
+                        {{ __('products.page_subtitle_empty') }}
                     @endif
                 </p>
             </div>
@@ -42,23 +42,23 @@
                             <svg class="w-5 h-5" style="color: #32A7E2;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
                             </svg>
-                            الفلاتر
+                            {{ __('products.filters_title') }}
                         </h3>
                         <button onclick="resetFilters()" class="text-sm font-semibold transition-colors hover:underline" style="color: #32A7E2;">
-                            إعادة تعيين
+                            {{ __('products.filters_reset') }}
                         </button>
                     </div>
                     
                     <form method="GET" action="{{ route('products.index') }}" id="filterForm" class="space-y-6">
                         <!-- Search -->
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-slate-700">البحث</label>
+                            <label class="block text-sm font-bold mb-2 text-slate-700">{{ __('products.filter_search') }}</label>
                             <div class="relative">
                                 <input 
                                     type="text" 
                                     name="search" 
                                     value="{{ request('search') }}"
-                                    placeholder="ابحث عن منتج..." 
+                                    placeholder="{{ __('products.filter_search_placeholder') }}" 
                                     class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 pr-10 focus:outline-none transition-all text-sm"
                                     style="border-color: rgb(226, 232, 240);"
                                     onfocus="this.style.borderColor='#32A7E2'; this.style.boxShadow='0 0 0 3px rgba(50, 167, 226, 0.1)';"
@@ -72,9 +72,9 @@
 
                         <!-- Category -->
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-slate-700">الفئة</label>
+                            <label class="block text-sm font-bold mb-2 text-slate-700">{{ __('products.filter_category') }}</label>
                             <select name="category" class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-[#32A7E2] focus:ring-2 focus:ring-[#32A7E2] focus:ring-opacity-20 focus:outline-none transition-all text-sm">
-                                <option value="">جميع الفئات</option>
+                                <option value="">{{ __('products.filter_all_categories') }}</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
@@ -85,9 +85,9 @@
 
                         <!-- Wilaya -->
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-slate-700">الولاية</label>
+                            <label class="block text-sm font-bold mb-2 text-slate-700">{{ __('products.filter_wilaya') }}</label>
                             <select name="wilaya" class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-[#32A7E2] focus:ring-2 focus:ring-[#32A7E2] focus:ring-opacity-20 focus:outline-none transition-all text-sm">
-                                <option value="">جميع الولايات</option>
+                                <option value="">{{ __('products.filter_all_wilayas') }}</option>
                                 @foreach($wilayas as $wilaya)
                                     <option value="{{ $wilaya }}" {{ request('wilaya') == $wilaya ? 'selected' : '' }}>
                                         {{ $wilaya }}
@@ -98,7 +98,7 @@
 
                         <!-- Price Range -->
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-slate-700">نطاق السعر (DZD)</label>
+                            <label class="block text-sm font-bold mb-2 text-slate-700">{{ __('products.filter_price_range') }}</label>
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
                                     <input 
@@ -113,7 +113,7 @@
                                     <input 
                                         type="number" 
                                         name="max_price" 
-                                        placeholder="إلى" 
+                                        placeholder="{{ __('products.filter_price_to') }}" 
                                         value="{{ request('max_price') }}" 
                                         class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-[#32A7E2] focus:ring-2 focus:ring-[#32A7E2] focus:ring-opacity-20 focus:outline-none transition-all text-sm"
                                     >
@@ -123,12 +123,12 @@
 
                         <!-- Sort -->
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-slate-700">ترتيب حسب</label>
+                            <label class="block text-sm font-bold mb-2 text-slate-700">{{ __('products.filter_sort') }}</label>
                             <select name="sort" class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-[#32A7E2] focus:ring-2 focus:ring-[#32A7E2] focus:ring-opacity-20 focus:outline-none transition-all text-sm">
-                                <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>الأحدث</option>
-                                <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>السعر: منخفض إلى مرتفع</option>
-                                <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>السعر: مرتفع إلى منخفض</option>
-                                <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>الأعلى تقييماً</option>
+                                <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>{{ __('products.sort_newest') }}</option>
+                                <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>{{ __('products.sort_price_low') }}</option>
+                                <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>{{ __('products.sort_price_high') }}</option>
+                                <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>{{ __('products.sort_rating') }}</option>
                             </select>
                         </div>
 
@@ -137,7 +137,7 @@
                             class="w-full py-3.5 rounded-xl text-white font-bold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                             style="background: linear-gradient(135deg, #32A7E2, #2B96D1);"
                         >
-                            تطبيق الفلاتر
+                            {{ __('products.filters_apply') }}
                         </button>
                     </form>
                 </div>
@@ -176,7 +176,7 @@
                                                 <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                                 </svg>
-                                                موثق
+                                                {{ __('products.verified_supplier') }}
                                             </div>
                                         @endif
                                         @if($product->quantity > 0)
@@ -184,11 +184,11 @@
                                                 <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                                 </svg>
-                                                متوفر
+                                                {{ __('products.available') }}
                                             </div>
                                         @else
                                             <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold text-white shadow-lg bg-red-500">
-                                                غير متوفر
+                                                {{ __('common.unavailable') }}
                                             </div>
                                         @endif
                                     </div>
@@ -249,7 +249,7 @@
                                 class="px-8 py-3.5 rounded-xl font-bold text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                                 style="background: linear-gradient(135deg, #32A7E2, #2B96D1);"
                             >
-                                تحميل المزيد
+                                {{ __('products.load_more') }}
                             </button>
                         @endif
                     </div>
@@ -261,7 +261,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold text-slate-900 mb-3">لا توجد منتجات</h3>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3">{{ __('products.no_products_title') }}</h3>
                         <p class="text-gray-600 mb-6 max-w-md mx-auto">لم نجد منتجات تطابق معايير البحث الخاصة بك. جرب تغيير الفلاتر أو البحث عن شيء آخر.</p>
                         <a href="{{ route('products.index') }}" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" style="background: linear-gradient(135deg, #32A7E2, #2B96D1);">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -288,7 +288,7 @@
         loadMoreBtn.addEventListener('click', async function() {
             if (!nextCursor) return;
             
-            loadMoreBtn.textContent = 'جاري التحميل...';
+            loadMoreBtn.textContent = '{{ __('products.loading') }}';
             loadMoreBtn.disabled = true;
             
             const params = new URLSearchParams(window.location.search);
@@ -326,12 +326,12 @@
                 if (!data.has_more) {
                     loadMoreBtn.remove();
                 } else {
-                    loadMoreBtn.textContent = 'تحميل المزيد';
+                    loadMoreBtn.textContent = '{{ __('products.load_more') }}';
                     loadMoreBtn.disabled = false;
                 }
             } catch (error) {
                 console.error('Error loading more products:', error);
-                loadMoreBtn.textContent = 'خطأ في التحميل';
+                loadMoreBtn.textContent = '{{ __('products.load_error') }}';
             }
         });
     }

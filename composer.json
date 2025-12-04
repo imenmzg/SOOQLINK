@@ -7,13 +7,15 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.0",
+        "filament/spatie-laravel-translatable-plugin": "*",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^3.11",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.2",
         "laravel/tinker": "^2.9",
         "spatie/laravel-medialibrary": "^11.17",
-        "spatie/laravel-permission": "^6.23"
+        "spatie/laravel-permission": "^6.23",
+        "spatie/laravel-translatable": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

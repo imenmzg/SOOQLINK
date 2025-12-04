@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia, HasTranslations;
 
     protected $fillable = [
         'supplier_id',
@@ -29,6 +30,8 @@ class Product extends Model implements HasMedia
         'is_published',
         'views_count',
     ];
+
+    public $translatable = ['name', 'description', 'technical_details'];
 
     protected function casts(): array
     {

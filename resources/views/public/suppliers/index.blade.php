@@ -15,13 +15,13 @@
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                     </svg>
-                    موردين موثوقين ومعتمدين
+                    {{ __('suppliers.page_badge') }}
                 </div>
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-4">
-                    الموردين <span style="color: #32A7E2;">الموثوقين</span>
+                    {{ __('suppliers.page_title') }}
                 </h1>
                 <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
-                    اكتشف موردين موثوقين وشركاء أعمال محترفين لتنمية أعمالك
+                    {{ __('suppliers.page_subtitle') }}
                 </p>
             </div>
         </div>
@@ -38,7 +38,7 @@
                             type="text" 
                             name="search" 
                             value="{{ request('search') }}"
-                            placeholder="ابحث عن مورد..." 
+                            placeholder="{{ __('suppliers.filter_search_placeholder') }}" 
                             class="w-full border-2 border-gray-200 rounded-xl px-5 py-3 pr-12 focus:outline-none transition-all text-sm"
                             style="border-color: rgb(226, 232, 240);"
                             onfocus="this.style.borderColor='#32A7E2'; this.style.boxShadow='0 0 0 3px rgba(50, 167, 226, 0.1)';"
@@ -56,12 +56,12 @@
                 <div class="flex items-center gap-6">
                     <div class="text-center">
                         <div class="text-2xl font-bold" style="color: #32A7E2;">{{ $suppliers->total() }}</div>
-                        <div class="text-xs text-gray-600">مورد موثوق</div>
+                        <div class="text-xs text-gray-600">{{ __('suppliers.verified_supplier') }}</div>
                     </div>
                     <div class="h-12 w-px bg-gray-200"></div>
                     <div class="text-center">
                         <div class="text-2xl font-bold" style="color: #6FC242;">{{ \App\Models\Product::published()->verifiedSuppliers()->count() }}</div>
-                        <div class="text-xs text-gray-600">منتج متاح</div>
+                        <div class="text-xs text-gray-600">{{ __('products.available') }}</div>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                                         <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
-                                        موثق
+                                        {{ __('suppliers.verified') }}
                                     </div>
                                 @endif
                             </div>
@@ -131,7 +131,7 @@
                                             </div>
                                             <div class="flex items-center gap-1">
                                                 <span class="text-sm font-bold text-slate-900">{{ number_format($supplier->average_rating, 1) }}</span>
-                                                <span class="text-xs text-gray-500">({{ $supplier->total_reviews ?? 0 }} تقييم)</span>
+                                                <span class="text-xs text-gray-500">({{ $supplier->total_reviews ?? 0 }} {{ trans_choice('suppliers.reviews_count', $supplier->total_reviews ?? 0) }})</span>
                                             </div>
                                         </div>
                                     @endif
@@ -143,7 +143,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                                                 </svg>
                                             </div>
-                                            <span class="text-sm font-medium">{{ $supplier->products->count() }} منتج متاح</span>
+                                            <span class="text-sm font-medium">{{ $supplier->products->count() }} {{ trans_choice('suppliers.products_available', $supplier->products->count()) }}</span>
                                         </div>
                                     @endif
                                 </div>
@@ -157,7 +157,7 @@
                                 <!-- View Button -->
                                 <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                                     <span class="text-sm font-bold transition-colors" style="color: #32A7E2;">
-                                        عرض التفاصيل
+                                        {{ __('suppliers.view_details') }}
                                     </span>
                                     <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" style="color: #32A7E2;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -183,13 +183,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                 </div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-3">لا توجد موردين</h3>
-                <p class="text-gray-600 mb-6 max-w-md mx-auto">لم نجد موردين موثوقين في الوقت الحالي. يرجى المحاولة مرة أخرى لاحقاً.</p>
+                <h3 class="text-2xl font-bold text-slate-900 mb-3">{{ __('suppliers.no_suppliers_title') }}</h3>
+                <p class="text-gray-600 mb-6 max-w-md mx-auto">{{ __('suppliers.no_suppliers_message') }}</p>
                 <a href="{{ route('suppliers.index') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" style="background-color: #32A7E2;">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
-                    تحديث الصفحة
+                    {{ __('suppliers.refresh_page') }}
                 </a>
             </div>
         @endif

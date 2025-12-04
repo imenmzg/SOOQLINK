@@ -25,34 +25,34 @@
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            <span>منصة B2B موثوقة</span>
+                            <span>{{ __('home.hero_badge') }}</span>
                         </div>
                     </div>
                     
                     <!-- Title -->
                     <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-slate-900 leading-tight">
-                        اربط شركتك
-                        <span class="block mt-2" style="color: #32A7E2;">بالموردين الموثوقين</span>
+                        {{ __('home.hero_title_1') }}
+                        <span class="block mt-2" style="color: #32A7E2;">{{ __('home.hero_title_2') }}</span>
                     </h1>
                     
                     <!-- Subtitle -->
                     <p class="text-lg sm:text-xl text-slate-600 leading-relaxed">
-                        منصة احترافية تربط الشركات بالموردين الموثوقين. إدارة شاملة للمنتجات، الطلبات، والتواصل في مكان واحد.
+                        {{ __('home.hero_subtitle') }}
                     </p>
                     
                     <!-- Stats - Compact Inline -->
                     <div class="flex flex-wrap items-center gap-4 pt-2">
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-sm border transition-all hover:shadow-md" style="border-color: rgba(50, 167, 226, 0.15);">
                             <span class="text-2xl font-bold" style="color: #32A7E2;">{{ \App\Models\Supplier::verified()->count() }}+</span>
-                            <span class="text-sm text-slate-600 font-medium">مورد موثق</span>
+                            <span class="text-sm text-slate-600 font-medium">{{ __('home.hero_verified_suppliers') }}</span>
                         </div>
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-sm border transition-all hover:shadow-md" style="border-color: rgba(111, 194, 66, 0.15);">
                             <span class="text-2xl font-bold" style="color: #6FC242;">{{ \App\Models\Product::published()->count() }}+</span>
-                            <span class="text-sm text-slate-600 font-medium">منتج متاح</span>
+                            <span class="text-sm text-slate-600 font-medium">{{ __('home.hero_available_products') }}</span>
                         </div>
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-sm border transition-all hover:shadow-md" style="border-color: rgba(50, 167, 226, 0.15);">
                             <span class="text-2xl font-bold" style="color: #32A7E2;">{{ \App\Models\Category::active()->count() }}</span>
-                            <span class="text-sm text-slate-600 font-medium">فئة رئيسية</span>
+                            <span class="text-sm text-slate-600 font-medium">{{ __('home.hero_main_categories') }}</span>
                         </div>
                     </div>
                     
@@ -62,7 +62,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
-                            <span>استكشف المنتجات</span>
+                            <span>{{ __('home.hero_explore_products') }}</span>
                             <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                             </svg>
@@ -71,7 +71,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
                             </svg>
-                            <span>انضم كمورد</span>
+                            <span>{{ __('home.hero_join_supplier') }}</span>
                         </a>
                     </div>
                 </div>
@@ -120,8 +120,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="text-lg font-bold text-slate-900">موثوق</div>
-                                    <div class="text-xs text-slate-600 font-medium">شراكة آمنة</div>
+                                    <div class="text-lg font-bold text-slate-900">{{ __('home.trust_badge') }}</div>
+                                    <div class="text-xs text-slate-600 font-medium">{{ __('home.trust_description') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -138,8 +138,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="text-lg font-bold text-slate-900">نمو</div>
-                                    <div class="text-xs text-slate-600 font-medium">أعمالك</div>
+                                    <div class="text-lg font-bold text-slate-900">{{ __('home.growth_badge') }}</div>
+                                    <div class="text-xs text-slate-600 font-medium">{{ __('home.growth_description') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -155,8 +155,8 @@
             <div class="inline-block mb-4">
                 <div class="h-1.5 w-24 rounded-full mx-auto shadow-lg" style="background: linear-gradient(to left, #32A7E2, #6FC242);"></div>
             </div>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">تصفح حسب الفئة</h2>
-            <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">اكتشف منتجات متنوعة من مختلف الفئات</p>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">{{ __('home.browse_title') }}</h2>
+            <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">{{ __('home.browse_subtitle') }}</p>
                 </div>
                 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -213,7 +213,7 @@
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                         </svg>
-                                    <span class="font-semibold">{{ $category->products()->count() }} منتج</span>
+                                    <span class="font-semibold">{{ $category->products()->count() }} {{ __('home.products_count') }}</span>
             </div>
                     </div>
                 </div>
@@ -246,8 +246,8 @@
                 <div class="inline-block mb-4">
                     <div class="h-1.5 w-24 rounded-full mx-auto shadow-lg" style="background: linear-gradient(to left, #32A7E2, #6FC242);"></div>
                 </div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">استكشف عالم SOOQLINK</h2>
-                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">منصة متكاملة تربط الشركات بالموردين الموثوقين</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">{{ __('home.explore_title') }}</h2>
+                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">{{ __('home.explore_subtitle') }}</p>
             </div>
             
             <!-- Modern Image Layout -->
@@ -262,8 +262,8 @@
                     <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(50, 167, 226, 0.85), rgba(50, 167, 226, 0.6), transparent);"></div>
                     <div class="absolute inset-0 flex items-center p-6 sm:p-8 md:p-12 text-white">
                         <div class="max-w-2xl">
-                            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">فريق دعم محترف على مدار الساعة</h3>
-                            <p class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 leading-relaxed" style="color: rgba(255, 255, 255, 0.9);">نوفر لك فريق دعم متخصص على مدار الساعة لمساعدتك في كل خطوة. نحن هنا لدعم نجاحك</p>
+                            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">{{ __('home.support_24_7') }}</h3>
+                            <p class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 leading-relaxed" style="color: rgba(255, 255, 255, 0.9);">{{ __('home.support_desc') }}</p>
                             <div class="flex items-center gap-4">
                                 <div class="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/30">
                                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,8 +271,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-lg">دعم فني 24/7</div>
-                                    <div class="text-sm" style="color: rgba(255, 255, 255, 0.8);">متاح دائماً لمساعدتك</div>
+                                    <div class="font-bold text-lg">{{ __('home.technical_support') }}</div>
+                                    <div class="text-sm" style="color: rgba(255, 255, 255, 0.8);">{{ __('home.always_available') }}</div>
                                 </div>
                         </div>
                         </div>
@@ -289,8 +289,8 @@
                         >
                         <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(111, 194, 66, 0.85), rgba(111, 194, 66, 0.5), transparent);"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
-                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2 md:mb-3">شراكات استراتيجية</h3>
-                            <p class="text-sm sm:text-base md:text-lg leading-relaxed" style="color: rgba(255, 255, 255, 0.9);">اربط شركتك بموردين موثوقين ووسّع شبكة أعمالك. شراكات طويلة الأمد</p>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2 md:mb-3">{{ __('home.strategic_partnerships') }}</h3>
+                            <p class="text-sm sm:text-base md:text-lg leading-relaxed" style="color: rgba(255, 255, 255, 0.9);">{{ __('home.strategic_desc') }}</p>
                         </div>
                     </div>
                     
@@ -302,8 +302,8 @@
                         >
                         <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(50, 167, 226, 0.85), rgba(50, 167, 226, 0.5), transparent);"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
-                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2 md:mb-3">تحليلات ذكية</h3>
-                            <p class="text-sm sm:text-base md:text-lg leading-relaxed" style="color: rgba(255, 255, 255, 0.9);">تتبع أداء أعمالك وإحصائيات مفصلة في لوحة واحدة. قرارات مدروسة</p>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-2 md:mb-3">{{ __('home.smart_analytics') }}</h3>
+                            <p class="text-sm sm:text-base md:text-lg leading-relaxed" style="color: rgba(255, 255, 255, 0.9);">{{ __('home.analytics_desc') }}</p>
                         </div>
                     </div>
                 </div>
@@ -318,8 +318,8 @@
                         >
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-4 md:p-8 text-white">
-                            <h4 class="font-bold text-base sm:text-lg md:text-xl mb-1 md:mb-2">واجهة عصرية</h4>
-                            <p class="text-xs sm:text-sm md:text-base text-slate-200">تصميم سهل الاستخدام وحديث</p>
+                            <h4 class="font-bold text-base sm:text-lg md:text-xl mb-1 md:mb-2">{{ __('home.modern_interface') }}</h4>
+                            <p class="text-xs sm:text-sm md:text-base text-slate-200">{{ __('home.modern_desc') }}</p>
                         </div>
                     </div>
                     
@@ -331,8 +331,8 @@
                         >
                         <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(111, 194, 66, 0.8), transparent);"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-4 md:p-8 text-white">
-                            <h4 class="font-bold text-base sm:text-lg md:text-xl mb-1 md:mb-2">نمو مستمر</h4>
-                            <p class="text-xs sm:text-sm md:text-base" style="color: rgba(255, 255, 255, 0.9);">وسّع أعمالك بسهولة وأمان</p>
+                            <h4 class="font-bold text-base sm:text-lg md:text-xl mb-1 md:mb-2">{{ __('home.continuous_growth') }}</h4>
+                            <p class="text-xs sm:text-sm md:text-base" style="color: rgba(255, 255, 255, 0.9);">{{ __('home.growth_desc') }}</p>
                         </div>
                     </div>
                     
@@ -344,8 +344,8 @@
                         >
                         <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(50, 167, 226, 0.8), transparent);"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-4 md:p-8 text-white">
-                            <h4 class="font-bold text-base sm:text-lg md:text-xl mb-1 md:mb-2">نجاح مضمون</h4>
-                            <p class="text-xs sm:text-sm md:text-base" style="color: rgba(255, 255, 255, 0.9);">أدوات احترافية لنجاحك</p>
+                            <h4 class="font-bold text-base sm:text-lg md:text-xl mb-1 md:mb-2">{{ __('home.guaranteed_success') }}</h4>
+                            <p class="text-xs sm:text-sm md:text-base" style="color: rgba(255, 255, 255, 0.9);">{{ __('home.success_desc') }}</p>
                 </div>
             </div>
         </div>
@@ -361,8 +361,8 @@
                 <div class="inline-block mb-4">
                     <div class="h-1.5 w-24 rounded-full mx-auto shadow-lg" style="background: linear-gradient(to right, #32A7E2, #32A7E2, #6FC242); box-shadow: 0 10px 15px -3px rgba(50, 167, 226, 0.3);"></div>
                 </div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">منتجات مميزة</h2>
-                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">اكتشف أفضل المنتجات من موردين موثوقين</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">{{ __('home.featured_products_title') }}</h2>
+                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">{{ __('home.featured_products_subtitle') }}</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($featuredProducts as $index => $product)
@@ -401,7 +401,7 @@
                                     <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
-                                    موثق
+                                    {{ __('home.verified') }}
                                 </div>
                             @endif
                         </div>
@@ -427,7 +427,7 @@
                 <a href="{{ route('products.index') }}" class="relative inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-2xl overflow-hidden group border-2" style="background-color: #32A7E2; border-color: #32A7E2; box-shadow: 0 10px 15px -3px rgba(50, 167, 226, 0.25);" onmouseover="this.style.backgroundColor='#2a95d1'; this.style.borderColor='#2a95d1'" onmouseout="this.style.backgroundColor='#32A7E2'; this.style.borderColor='#32A7E2'">
                     <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: linear-gradient(to right, #32A7E2, #32A7E2, #32A7E2);"></span>
                     <span class="relative flex items-center gap-2">
-                        <span>عرض جميع المنتجات</span>
+                        <span>{{ __('home.view_all_products') }}</span>
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>
@@ -445,8 +445,8 @@
                 <div class="inline-block mb-4">
                     <div class="h-1.5 w-24 rounded-full mx-auto shadow-lg" style="background: linear-gradient(to left, #32A7E2, #6FC242);"></div>
                 </div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">مميزات المنصة</h2>
-                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">كل ما تحتاجه لإدارة أعمالك بكفاءة واحترافية</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">{{ __('home.features_title') }}</h2>
+                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">{{ __('home.features_subtitle') }}</p>
             </div>
             
             <!-- Grid 2x2 Layout -->
@@ -472,9 +472,9 @@
                     
                     <!-- Content -->
                     <div class="relative">
-                        <h3 class="font-bold text-xl md:text-2xl mb-3 md:mb-4 text-slate-900">بحث متقدم</h3>
+                        <h3 class="font-bold text-xl md:text-2xl mb-3 md:mb-4 text-slate-900">{{ __('home.advanced_search_title') }}</h3>
                         <p class="text-slate-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
-                            فلاتر ذكية ومتقدمة للعثور على المنتجات والموردين المناسبين بسرعة ودقة. ابحث بالاسم، الفئة، السعر، الموقع، والتقييمات.
+                            {{ __('home.advanced_search_desc') }}
                         </p>
                         
                         <!-- Feature List -->
@@ -485,7 +485,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">فلترة متقدمة بمعايير متعددة</span>
+                                <span class="text-sm">{{ __('home.advanced_filtering') }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-slate-700">
                                 <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background: linear-gradient(135deg, #32A7E2, #1B4B72);">
@@ -493,7 +493,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">نتائج فورية مع معاينة سريعة</span>
+                                <span class="text-sm">{{ __('home.instant_results') }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-slate-700">
                                 <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background: linear-gradient(135deg, #32A7E2, #1B4B72);">
@@ -501,7 +501,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">حفظ البحث المفضل</span>
+                                <span class="text-sm">{{ __('home.save_searches') }}</span>
                             </div>
                         </div>
                     </div>
@@ -531,9 +531,9 @@
                     
                     <!-- Content -->
                     <div class="relative">
-                        <h3 class="font-bold text-xl md:text-2xl mb-3 md:mb-4 text-slate-900">لوحة تحكم شاملة</h3>
+                        <h3 class="font-bold text-xl md:text-2xl mb-3 md:mb-4 text-slate-900">{{ __('home.dashboard_title') }}</h3>
                         <p class="text-slate-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
-                            إدارة كاملة لجميع عملياتك من مكان واحد. تتبع المنتجات، الطلبات، الرسائل، والإحصائيات في لوحة تحكم موحدة وسهلة الاستخدام.
+                            {{ __('home.dashboard_desc') }}
                         </p>
                         
                         <!-- Feature List -->
@@ -544,7 +544,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">إدارة متكاملة لجميع العمليات</span>
+                                <span class="text-sm">{{ __('home.integrated_management') }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-slate-700">
                                 <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background: linear-gradient(135deg, #6FC242, #4A9D2F);">
@@ -552,7 +552,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">تقارير وإحصائيات مفصلة</span>
+                                <span class="text-sm">{{ __('home.detailed_reports') }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-slate-700">
                                 <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background: linear-gradient(135deg, #6FC242, #4A9D2F);">
@@ -560,7 +560,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">واجهة سهلة وسريعة</span>
+                                <span class="text-sm">{{ __('home.fast_interface') }}</span>
                             </div>
                         </div>
                     </div>
@@ -590,9 +590,9 @@
                     
                     <!-- Content -->
                     <div class="relative">
-                        <h3 class="font-bold text-xl md:text-2xl mb-3 md:mb-4 text-slate-900">أمان عالي</h3>
+                        <h3 class="font-bold text-xl md:text-2xl mb-3 md:mb-4 text-slate-900">{{ __('home.security_title') }}</h3>
                         <p class="text-slate-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
-                            نظام تحقق متقدم للموردين وحماية شاملة للبيانات بأعلى معايير الأمان. تشفير كامل للمعلومات وحماية من التهديدات.
+                            {{ __('home.security_desc') }}
                         </p>
                         
                         <!-- Feature List -->
@@ -603,7 +603,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">تحقق متقدم من الموردين</span>
+                                <span class="text-sm">{{ __('home.security_supplier_check') }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-slate-700">
                                 <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background: linear-gradient(135deg, #32A7E2, #1B4B72);">
@@ -611,7 +611,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">تشفير وحماية للبيانات</span>
+                                <span class="text-sm">{{ __('home.security_encryption') }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-slate-700">
                                 <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background: linear-gradient(135deg, #32A7E2, #1B4B72);">
@@ -619,7 +619,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">حماية من التهديدات الإلكترونية</span>
+                                <span class="text-sm">{{ __('home.security_protection') }}</span>
                             </div>
                         </div>
                     </div>
@@ -649,9 +649,9 @@
                     
                     <!-- Content -->
                     <div class="relative">
-                        <h3 class="font-bold text-xl md:text-2xl mb-3 md:mb-4 text-slate-900">تواصل مباشر</h3>
+                        <h3 class="font-bold text-xl md:text-2xl mb-3 md:mb-4 text-slate-900">{{ __('home.communication_title') }}</h3>
                         <p class="text-slate-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">
-                            رسائل فورية مع الموردين والعملاء مع إشعارات لحظية وتتبع للمحادثات. تواصل سريع وفعال لإتمام الصفقات.
+                            {{ __('home.communication_desc') }}
                         </p>
                         
                         <!-- Feature List -->
@@ -662,7 +662,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">رسائل فورية مع إشعارات</span>
+                                <span class="text-sm">{{ __('home.communication_instant') }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-slate-700">
                                 <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background: linear-gradient(135deg, #6FC242, #4A9D2F);">
@@ -670,7 +670,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">تتبع كامل للمحادثات</span>
+                                <span class="text-sm">{{ __('home.communication_tracking') }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-slate-700">
                                 <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background: linear-gradient(135deg, #6FC242, #4A9D2F);">
@@ -678,7 +678,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
-                                <span class="text-sm">مشاركة الملفات والصور</span>
+                                <span class="text-sm">{{ __('home.communication_files') }}</span>
                             </div>
                         </div>
                     </div>
@@ -697,8 +697,8 @@
                 <div class="inline-block mb-4">
                     <div class="h-1.5 w-24 rounded-full mx-auto shadow-lg" style="background: linear-gradient(to left, #32A7E2, #6FC242);"></div>
                 </div>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">الأسئلة الشائعة</h2>
-                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">إجابات على أكثر الأسئلة شيوعاً حول منصة SOOQLINK</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-slate-900">{{ __('home.faq_title') }}</h2>
+                <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">{{ __('home.faq_subtitle') }}</p>
             </div>
             
             <!-- FAQ Items -->
@@ -707,8 +707,8 @@
                 <div class="animate-on-scroll stagger-1 group bg-white rounded-xl border-2 border-slate-200 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg" style="border-color: rgb(226, 232, 240);" onmouseover="this.style.borderColor='rgba(50, 167, 226, 0.5)'" onmouseout="this.style.borderColor='rgb(226, 232, 240)'">
                     <button class="w-full px-6 py-5 text-right flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFAQ(this)">
                         <div class="flex-1">
-                            <h3 class="font-bold text-lg text-slate-900 mb-1">ما هي منصة SOOQLINK؟</h3>
-                            <p class="text-slate-600 text-sm faq-answer hidden">منصة SOOQLINK هي منصة B2B متخصصة تربط الشركات بالموردين الموثوقين. تتيح للشركات البحث عن المنتجات والموردين، طلب عروض الأسعار، والتواصل المباشر مع الموردين.</p>
+                            <h3 class="font-bold text-lg text-slate-900 mb-1">{{ __('home.faq_q1') }}</h3>
+                            <p class="text-slate-600 text-sm faq-answer hidden">{{ __('home.faq_a1') }}</p>
                         </div>
                         <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-transform duration-300 faq-icon" style="background: linear-gradient(135deg, #32A7E2, #1B4B72);">
                             <svg class="w-5 h-5 text-white transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -722,8 +722,8 @@
                 <div class="animate-on-scroll stagger-2 group bg-white rounded-xl border-2 border-slate-200 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg" style="border-color: rgb(226, 232, 240);" onmouseover="this.style.borderColor='rgba(111, 194, 66, 0.5)'" onmouseout="this.style.borderColor='rgb(226, 232, 240)'">
                     <button class="w-full px-6 py-5 text-right flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFAQ(this)">
                         <div class="flex-1">
-                            <h3 class="font-bold text-lg text-slate-900 mb-1">كيف يمكنني التسجيل في المنصة؟</h3>
-                            <p class="text-slate-600 text-sm faq-answer hidden">يمكنك التسجيل بسهولة من خلال النقر على زر "انضم كمورد" أو "انضم كعميل" في الصفحة الرئيسية. عملية التسجيل بسيطة وسريعة وتتطلب معلومات أساسية فقط.</p>
+                            <h3 class="font-bold text-lg text-slate-900 mb-1">{{ __('home.faq_q2') }}</h3>
+                            <p class="text-slate-600 text-sm faq-answer hidden">{{ __('home.faq_a2') }}</p>
                         </div>
                         <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-transform duration-300 faq-icon" style="background: linear-gradient(135deg, #6FC242, #4A9D2F);">
                             <svg class="w-5 h-5 text-white transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -737,8 +737,8 @@
                 <div class="animate-on-scroll stagger-3 group bg-white rounded-xl border-2 border-slate-200 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg" style="border-color: rgb(226, 232, 240);" onmouseover="this.style.borderColor='rgba(50, 167, 226, 0.5)'" onmouseout="this.style.borderColor='rgb(226, 232, 240)'">
                     <button class="w-full px-6 py-5 text-right flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFAQ(this)">
                         <div class="flex-1">
-                            <h3 class="font-bold text-lg text-slate-900 mb-1">هل التسجيل مجاني؟</h3>
-                            <p class="text-slate-600 text-sm faq-answer hidden">نعم، التسجيل في منصة SOOQLINK مجاني تماماً. يمكنك إنشاء حساب والبدء في استخدام المنصة دون أي رسوم.</p>
+                            <h3 class="font-bold text-lg text-slate-900 mb-1">{{ __('home.faq_q3') }}</h3>
+                            <p class="text-slate-600 text-sm faq-answer hidden">{{ __('home.faq_a3') }}</p>
                         </div>
                         <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-transform duration-300 faq-icon" style="background: linear-gradient(135deg, #32A7E2, #1B4B72);">
                             <svg class="w-5 h-5 text-white transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -752,8 +752,8 @@
                 <div class="animate-on-scroll stagger-4 group bg-white rounded-xl border-2 border-slate-200 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg" style="border-color: rgb(226, 232, 240);" onmouseover="this.style.borderColor='rgba(111, 194, 66, 0.5)'" onmouseout="this.style.borderColor='rgb(226, 232, 240)'">
                     <button class="w-full px-6 py-5 text-right flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFAQ(this)">
                         <div class="flex-1">
-                            <h3 class="font-bold text-lg text-slate-900 mb-1">كيف يمكنني البحث عن المنتجات؟</h3>
-                            <p class="text-slate-600 text-sm faq-answer hidden">يمكنك البحث عن المنتجات من خلال صفحة "المنتجات" باستخدام شريط البحث أو الفلاتر المتقدمة. يمكنك البحث بالاسم، الفئة، السعر، أو الموقع.</p>
+                            <h3 class="font-bold text-lg text-slate-900 mb-1">{{ __('home.faq_q4') }}</h3>
+                            <p class="text-slate-600 text-sm faq-answer hidden">{{ __('home.faq_a4') }}</p>
                         </div>
                         <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-transform duration-300 faq-icon" style="background: linear-gradient(135deg, #6FC242, #4A9D2F);">
                             <svg class="w-5 h-5 text-white transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -767,8 +767,8 @@
                 <div class="animate-on-scroll stagger-5 group bg-white rounded-xl border-2 border-slate-200 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg" style="border-color: rgb(226, 232, 240);" onmouseover="this.style.borderColor='rgba(50, 167, 226, 0.5)'" onmouseout="this.style.borderColor='rgb(226, 232, 240)'">
                     <button class="w-full px-6 py-5 text-right flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFAQ(this)">
                         <div class="flex-1">
-                            <h3 class="font-bold text-lg text-slate-900 mb-1">كيف يمكنني التواصل مع الموردين؟</h3>
-                            <p class="text-slate-600 text-sm faq-answer hidden">يمكنك التواصل مع الموردين مباشرة من خلال نظام الرسائل في المنصة. بعد تسجيل الدخول، يمكنك إرسال رسائل للموردين وطلب عروض أسعار.</p>
+                            <h3 class="font-bold text-lg text-slate-900 mb-1">{{ __('home.faq_q5') }}</h3>
+                            <p class="text-slate-600 text-sm faq-answer hidden">{{ __('home.faq_a5') }}</p>
                         </div>
                         <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-transform duration-300 faq-icon" style="background: linear-gradient(135deg, #32A7E2, #1B4B72);">
                             <svg class="w-5 h-5 text-white transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1016,14 +1016,14 @@
                     <svg class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                     </svg>
-                    <span>ابدأ مجاناً اليوم</span>
+                    <span>{{ __('home.start_free_today') }}</span>
                 </div>
                 
                 <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 leading-tight">
-                    جاهز للبدء؟
+                    {{ __('home.ready_title') }}
                 </h2>
                 <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed px-4" style="color: rgba(255, 255, 255, 0.9);">
-                    انضم إلى منصة SOOQLINK وابدأ رحلتك في عالم التجارة الإلكترونية B2B. ربط سريع، سهولة في الاستخدام، ونتائج مضمونة
+                    {{ __('home.ready_subtitle') }}
                 </p>
                 
                 <!-- CTA Buttons -->
@@ -1034,7 +1034,7 @@
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
                             </svg>
-                            <span>انضم كمورد</span>
+                            <span>{{ __('home.hero_join_supplier') }}</span>
                             <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                             </svg>
@@ -1046,7 +1046,7 @@
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
-                            <span>انضم كعميل</span>
+                            <span>{{ __('navbar.register') }}</span>
                             <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                             </svg>
@@ -1060,19 +1060,19 @@
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color: rgba(111, 194, 66, 0.8);">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
-                        <span class="text-sm font-medium">تسجيل مجاني</span>
+                        <span class="text-sm font-medium">{{ __('home.free_registration') }}</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color: rgba(111, 194, 66, 0.8);">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
-                        <span class="text-sm font-medium">بدون رسوم خفية</span>
+                        <span class="text-sm font-medium">{{ __('home.no_hidden_fees') }}</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color: rgba(111, 194, 66, 0.8);">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
-                        <span class="text-sm font-medium">دعم فني متواصل</span>
+                        <span class="text-sm font-medium">{{ __('home.continuous_support') }}</span>
                     </div>
                 </div>
             </div>
