@@ -2,7 +2,6 @@
 /public/hot
 /public/storage
 /storage/*.key
-/vendor
 .env
 .env.backup
 .phpunit.result.cache
@@ -13,9 +12,10 @@ yarn-error.log
 /.idea
 /.vscode
 .DS_Store
-*.md
-!README.md
+!.env.example
 .git
 .gitignore
 .gitattributes
-
+tests/
+*.md
+!README.md
