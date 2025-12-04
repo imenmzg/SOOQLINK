@@ -14,9 +14,35 @@ echo "🔐 Setting permissions..."
 chmod -R 775 storage bootstrap/cache
 chown -R www-data:www-data storage bootstrap/cache
 
-# Check if APP_KEY is set
-if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:YOUR_KEY_HERE" ]; then
-    echo "⚠️  WARNING: APP_KEY not set! Generating one..."
+# Create .env if it doesn't exist (use environment variables from Render)
+if [ ! -f .env ]; then
+    echo "📝 Creating .env file from environment variables..."
+    cat > .env << EOF
+APP_NAME=\${APP_NAME:-SOOQLINK}
+APP_ENV=\${APP_ENV:-production}
+APP_KEY=\${APP_KEY:-}
+APP_DEBUG=\${APP_DEBUG:-false}
+APP_URL=\${APP_URL:-http://localhost}
+
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
+
+DB_CONNECTION=\${DB_CONNECTION:-mysql}
+DB_HOST=\${DB_HOST:-127.0.0.1}
+DB_PORT=\${DB_PORT:-3306}
+DB_DATABASE=\${DB_DATABASE:-sooqlink}
+DB_USERNAME=\${DB_USERNAME:-root}
+DB_PASSWORD=\${DB_PASSWORD:-}
+
+CACHE_DRIVER=\${CACHE_DRIVER:-file}
+SESSION_DRIVER=\${SESSION_DRIVER:-file}
+QUEUE_CONNECTION=\${QUEUE_CONNECTION:-sync}
+EOF
+fi
+
+# Generate APP_KEY if not set
+if [ -z "$APP_KEY" ]; then
+    echo "🔑 Generating APP_KEY..."
     php artisan key:generate --force
 fi
 
