@@ -26,6 +26,11 @@ APP_KEY=\${APP_KEY:-}
 APP_DEBUG=\${APP_DEBUG:-false}
 APP_URL=\${APP_URL_VALUE}
 
+# Ensure APP_URL is set correctly for asset loading
+if [ -z "\${APP_URL}" ]; then
+    APP_URL_VALUE="https://sooqlink.onrender.com"
+fi
+
 LOG_CHANNEL=stack
 LOG_LEVEL=debug
 LOG_DEPRECATIONS_CHANNEL=null
