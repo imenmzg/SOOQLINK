@@ -97,13 +97,13 @@ if [ ! -z "$DB_HOST" ]; then
     # Check if migrations table exists, if not create it
     php artisan migrate:install --force 2>/dev/null || true
     
-    # Run migrations with verbose output
-    if php artisan migrate --force --no-interaction -v; then
+    # Run migrations with verbose output (remove --force as it doesn't exist)
+    if php artisan migrate --no-interaction -v; then
         echo "✅ Migrations completed successfully!"
     else
         echo "⚠️  Migrations failed, but continuing..."
         # Try to run pending migrations only
-        php artisan migrate --force --no-interaction 2>&1 || true
+        php artisan migrate --no-interaction 2>&1 || true
     fi
     
     # Verify migrations completed
