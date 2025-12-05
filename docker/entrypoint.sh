@@ -47,7 +47,16 @@ FILESYSTEM_DISK=local
 
 ASSET_URL=
 VITE_APP_NAME=\${APP_NAME:-SOOQLINK}
+
+# Force file cache for rate limiting (avoid database cache issues)
+FILAMENT_CACHE_DRIVER=file
 EOF
+fi
+
+# Ensure CACHE_DRIVER is file (not database) to avoid cache table issues
+if grep -q "CACHE_DRIVER=database" .env 2>/dev/null; then
+    echo "⚠️  CACHE_DRIVER is set to database, changing to file..."
+    sed -i 's/CACHE_DRIVER=database/CACHE_DRIVER=file/g' .env || true
 fi
 
 # Generate APP_KEY if not set
