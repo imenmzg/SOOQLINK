@@ -23,6 +23,7 @@ return [
     'browse_subtitle' => 'Discover diverse products from various categories',
     'view_all_categories' => 'View All Categories',
     'products_count' => 'Products',
+    'no_categories' => 'No categories available at the moment',
     
     // Explore Section
     'explore_title' => 'Explore SOOQLINK World',

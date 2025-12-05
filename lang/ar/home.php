@@ -23,6 +23,7 @@ return [
     'browse_subtitle' => 'اكتشف منتجات متنوعة من مختلف الفئات',
     'view_all_categories' => 'عرض جميع الفئات',
     'products_count' => 'منتج',
+    'no_categories' => 'لا توجد فئات متاحة حالياً',
     
     // Explore Section  
     'explore_title' => 'استكشف عالم SOOQLINK',
