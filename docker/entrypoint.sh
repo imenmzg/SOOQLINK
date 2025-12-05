@@ -74,11 +74,21 @@ php artisan route:clear || true
 # Run migrations (only if database is configured)
 if [ ! -z "$DB_HOST" ]; then
     echo "🗄️  Running database migrations..."
-    php artisan migrate --force --no-interaction || {
-        echo "⚠️  Migrations failed - checking if tables exist..."
-        # Try to continue anyway - migrations might have partially run
+    # First, check migration status
+    php artisan migrate:status || echo "⚠️  Migration status check failed"
+    
+    # Run migrations with verbose output
+    php artisan migrate --force --no-interaction -v || {
+        echo "❌ Migrations failed! Attempting to continue..."
+        echo "📊 Migration status:"
         php artisan migrate:status || true
+        echo "🔄 Attempting to run migrations again..."
+        php artisan migrate --force --no-interaction || true
     }
+    
+    # Verify migrations completed
+    echo "✅ Verifying migrations..."
+    php artisan migrate:status | head -20 || true
 fi
 
 # Test database connection before caching
