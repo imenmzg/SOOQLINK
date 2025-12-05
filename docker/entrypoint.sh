@@ -132,6 +132,17 @@ echo "📦 Ensuring public assets are accessible..."
 chmod -R 755 /var/www/html/public || true
 chown -R www-data:www-data /var/www/html/public || true
 
+# Verify Filament assets were published
+echo "🔍 Verifying Filament assets..."
+if [ -d "/var/www/html/public/css/filament" ] && [ -d "/var/www/html/public/js/filament" ]; then
+    echo "✅ Filament assets found in public directory"
+    ls -la /var/www/html/public/css/filament/ | head -5 || true
+    ls -la /var/www/html/public/js/filament/ | head -5 || true
+else
+    echo "⚠️  Filament assets not found - attempting to publish again..."
+    php artisan filament:assets --force 2>&1 || true
+fi
+
 # Final permissions
 echo "🔒 Final permission adjustments..."
 chown -R www-data:www-data /var/www/html
