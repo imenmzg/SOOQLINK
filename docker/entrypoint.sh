@@ -17,12 +17,14 @@ chown -R www-data:www-data storage bootstrap/cache
 # Create .env if it doesn't exist (use environment variables from Render)
 if [ ! -f .env ]; then
     echo "📝 Creating .env file from environment variables..."
+    # Get APP_URL from environment or use default
+    APP_URL_VALUE=\${APP_URL:-https://sooqlink.onrender.com}
     cat > .env << EOF
 APP_NAME=\${APP_NAME:-SOOQLINK}
 APP_ENV=\${APP_ENV:-production}
 APP_KEY=\${APP_KEY:-}
 APP_DEBUG=\${APP_DEBUG:-true}
-APP_URL=\${APP_URL:-http://localhost}
+APP_URL=\${APP_URL_VALUE}
 
 LOG_CHANNEL=stack
 LOG_LEVEL=debug
@@ -114,10 +116,20 @@ fi
 echo "🔗 Creating storage link..."
 php artisan storage:link || echo "⚠️  Storage link already exists"
 
+# Publish Filament assets (for login/register pages)
+echo "🎨 Publishing Filament assets..."
+php artisan filament:assets 2>&1 || echo "⚠️  Filament assets publish failed (might already be published)"
+
+# Ensure public assets are accessible
+echo "📦 Ensuring public assets are accessible..."
+chmod -R 755 /var/www/html/public || true
+chown -R www-data:www-data /var/www/html/public || true
+
 # Final permissions
 echo "🔒 Final permission adjustments..."
 chown -R www-data:www-data /var/www/html
 chmod -R 775 storage bootstrap/cache
+chmod -R 755 public
 
 echo "✅ Deployment complete! Starting Apache..."
 
