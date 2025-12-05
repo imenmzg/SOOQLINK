@@ -95,15 +95,16 @@ if [ ! -z "$DB_HOST" ]; then
     echo "🗄️  Running database migrations..."
     
     # Check if migrations table exists, if not create it
-    php artisan migrate:install --force 2>/dev/null || true
+    php artisan migrate:install --no-interaction 2>/dev/null || true
     
-    # Run migrations with verbose output (remove --force as it doesn't exist)
-    if php artisan migrate --no-interaction -v; then
+    # Run migrations with no interaction (automatically confirms in production)
+    # Use yes command to auto-confirm if Laravel still prompts
+    if echo "yes" | php artisan migrate --no-interaction -v 2>&1; then
         echo "✅ Migrations completed successfully!"
     else
         echo "⚠️  Migrations failed, but continuing..."
-        # Try to run pending migrations only
-        php artisan migrate --no-interaction 2>&1 || true
+        # Try to run pending migrations only (with auto-confirm)
+        echo "yes" | php artisan migrate --no-interaction 2>&1 || true
     fi
     
     # Verify migrations completed
