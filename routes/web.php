@@ -58,37 +58,49 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/suppliers', function (\Illuminate\Http\Request $request) {
-    $query = \App\Models\Supplier::verified()
-        ->with(['user', 'products' => function ($q) {
-            $q->published();
-        }]);
-    
-    // Search functionality
-    if ($request->filled('search')) {
-        $search = $request->search;
-        $query->where(function ($q) use ($search) {
-            $q->where('company_name', 'like', "%{$search}%")
-              ->orWhere('company_description', 'like', "%{$search}%")
-              ->orWhere('wilaya', 'like', "%{$search}%");
-        });
+    try {
+        $query = \App\Models\Supplier::verified()
+            ->with(['user', 'products' => function ($q) {
+                $q->published();
+            }]);
+        
+        // Search functionality
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('company_name', 'like', "%{$search}%")
+                  ->orWhere('company_description', 'like', "%{$search}%")
+                  ->orWhere('wilaya', 'like', "%{$search}%");
+            });
+        }
+        
+        // Sort by rating if requested
+        if ($request->filled('sort') && $request->sort === 'rating') {
+            $query->orderBy('average_rating', 'desc');
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+        
+        $suppliers = $query->paginate(12);
+    } catch (\Exception $e) {
+        // If suppliers table doesn't exist, return empty paginator
+        $suppliers = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 12, 1);
     }
-    
-    // Sort by rating if requested
-    if ($request->filled('sort') && $request->sort === 'rating') {
-        $query->orderBy('average_rating', 'desc');
-    } else {
-        $query->orderBy('created_at', 'desc');
-    }
-    
-    $suppliers = $query->paginate(12);
     
     return view('public.suppliers.index', compact('suppliers'));
 })->name('suppliers.index');
 
 Route::get('/supplier/{id}', function ($id) {
-    $supplier = \App\Models\Supplier::with(['user', 'products' => function ($q) {
-        $q->published();
-    }, 'reviews'])->verified()->findOrFail($id);
+    try {
+        $supplier = \App\Models\Supplier::with(['user', 'products' => function ($q) {
+            $q->published();
+        }, 'reviews'])->verified()->findOrFail($id);
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        abort(404);
+    } catch (\Exception $e) {
+        // If suppliers table doesn't exist, show 404
+        abort(404);
+    }
     
     return view('public.supplier.show', compact('supplier'));
 })->name('supplier.show');
