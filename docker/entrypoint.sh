@@ -59,24 +59,28 @@ if [ ! -z "$DB_HOST" ]; then
     done
 fi
 
+# Clear all caches FIRST (before migrations)
+echo "🧹 Clearing caches..."
+php artisan config:clear || true
+php artisan cache:clear || true
+php artisan view:clear || true
+php artisan route:clear || true
+
 # Run migrations (only if database is configured)
 if [ ! -z "$DB_HOST" ]; then
     echo "🗄️  Running database migrations..."
-    php artisan migrate --force --no-interaction || echo "⚠️  Migrations failed (might be first run)"
+    php artisan migrate --force --no-interaction || {
+        echo "⚠️  Migrations failed - checking if tables exist..."
+        # Try to continue anyway - migrations might have partially run
+        php artisan migrate:status || true
+    }
 fi
 
-# Clear all caches
-echo "🧹 Clearing caches..."
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
-php artisan route:clear
-
-# Cache configuration for production
+# Cache configuration for production (after migrations)
 echo "⚡ Caching configuration..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+php artisan config:cache || true
+php artisan route:cache || true
+php artisan view:cache || true
 
 # Create storage link
 echo "🔗 Creating storage link..."
