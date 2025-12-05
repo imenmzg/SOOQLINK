@@ -96,6 +96,28 @@ if [ ! -z "$DB_HOST" ]; then
     # Verify migrations completed
     echo "📊 Migration status:"
     php artisan migrate:status 2>&1 | head -30 || echo "⚠️  Could not check migration status"
+    
+    # Ensure cache table exists (for rate limiting)
+    echo "🔍 Checking cache table..."
+    php artisan tinker --execute="
+        try {
+            DB::select('SELECT 1 FROM cache LIMIT 1');
+            echo 'Cache table exists';
+        } catch (\Exception \$e) {
+            echo 'Cache table missing - creating...';
+            Schema::create('cache', function (\$table) {
+                \$table->string('key')->primary();
+                \$table->mediumText('value');
+                \$table->integer('expiration');
+            });
+            Schema::create('cache_locks', function (\$table) {
+                \$table->string('key')->primary();
+                \$table->string('owner');
+                \$table->integer('expiration');
+            });
+            echo 'Cache tables created';
+        }
+    " 2>&1 || echo "⚠️  Cache table check failed (using file cache instead)"
 fi
 
 # Test database connection before caching
@@ -111,6 +133,24 @@ php artisan filament:assets --force 2>&1 || echo "⚠️  Filament assets publis
 # Clear Filament cache to ensure fresh asset loading
 echo "🧹 Clearing Filament component cache..."
 php artisan filament:cache-components 2>&1 || echo "⚠️  Filament cache clear failed"
+
+# Ensure Filament assets are accessible
+echo "🔍 Verifying Filament asset paths..."
+if [ -f "/var/www/html/public/css/filament/filament/app.css" ]; then
+    echo "✅ Filament CSS found"
+    ls -lh /var/www/html/public/css/filament/filament/ | head -3 || true
+else
+    echo "⚠️  Filament CSS not found - republishing..."
+    php artisan filament:assets --force 2>&1 || true
+fi
+
+if [ -f "/var/www/html/public/js/filament/filament/app.js" ]; then
+    echo "✅ Filament JS found"
+    ls -lh /var/www/html/public/js/filament/filament/ | head -3 || true
+else
+    echo "⚠️  Filament JS not found - republishing..."
+    php artisan filament:assets --force 2>&1 || true
+fi
 
 # Create storage link
 echo "🔗 Creating storage link..."
