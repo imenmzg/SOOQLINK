@@ -143,22 +143,49 @@ php artisan filament:assets --force 2>&1 || echo "⚠️  Filament assets publis
 echo "🧹 Clearing Filament component cache..."
 php artisan filament:cache-components 2>&1 || echo "⚠️  Filament cache clear failed"
 
-# Ensure Filament assets are accessible
+# Ensure Filament assets are accessible and properly linked
 echo "🔍 Verifying Filament asset paths..."
+ASSETS_OK=true
+
 if [ -f "/var/www/html/public/css/filament/filament/app.css" ]; then
-    echo "✅ Filament CSS found"
-    ls -lh /var/www/html/public/css/filament/filament/ | head -3 || true
+    echo "✅ Filament CSS found: $(ls -lh /var/www/html/public/css/filament/filament/app.css | awk '{print $5}')"
 else
-    echo "⚠️  Filament CSS not found - republishing..."
+    echo "❌ Filament CSS NOT found - republishing..."
     php artisan filament:assets --force 2>&1 || true
+    ASSETS_OK=false
 fi
 
 if [ -f "/var/www/html/public/js/filament/filament/app.js" ]; then
-    echo "✅ Filament JS found"
-    ls -lh /var/www/html/public/js/filament/filament/ | head -3 || true
+    echo "✅ Filament JS found: $(ls -lh /var/www/html/public/js/filament/filament/app.js | awk '{print $5}')"
 else
-    echo "⚠️  Filament JS not found - republishing..."
+    echo "❌ Filament JS NOT found - republishing..."
     php artisan filament:assets --force 2>&1 || true
+    ASSETS_OK=false
+fi
+
+# Check if theme.css exists (Filament 3.x uses theme.css)
+if [ -f "/var/www/html/public/css/filament/filament/theme.css" ]; then
+    echo "✅ Filament theme.css found"
+elif [ -f "/var/www/html/public/css/filament/filament/app.css" ]; then
+    echo "✅ Using app.css as theme"
+else
+    echo "⚠️  No theme CSS found - this might cause styling issues"
+    ASSETS_OK=false
+fi
+
+if [ "$ASSETS_OK" = false ]; then
+    echo "⚠️  Some Filament assets are missing - attempting manual copy..."
+    # Try to copy from vendor if published assets are missing
+    if [ -f "/var/www/html/vendor/filament/filament/dist/theme.css" ]; then
+        mkdir -p /var/www/html/public/css/filament/filament/
+        cp /var/www/html/vendor/filament/filament/dist/theme.css /var/www/html/public/css/filament/filament/theme.css 2>&1 || true
+        echo "✅ Copied theme.css from vendor"
+    fi
+    if [ -f "/var/www/html/vendor/filament/filament/dist/index.js" ]; then
+        mkdir -p /var/www/html/public/js/filament/filament/
+        cp /var/www/html/vendor/filament/filament/dist/index.js /var/www/html/public/js/filament/filament/app.js 2>&1 || true
+        echo "✅ Copied app.js from vendor"
+    fi
 fi
 
 # Create storage link
