@@ -14,12 +14,23 @@ use App\Http\Controllers\LanguageController;
 Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 Route::get('/', function () {
-    $categories = \App\Models\Category::active()->ordered()->limit(8)->get();
-    $featuredProducts = \App\Models\Product::published()
-        ->verifiedSuppliers()
-        ->orderByNewest()
-        ->limit(12)
-        ->get();
+    try {
+        $categories = \App\Models\Category::active()->ordered()->limit(8)->get();
+    } catch (\Exception $e) {
+        // If categories table doesn't exist, use empty collection
+        $categories = collect([]);
+    }
+    
+    try {
+        $featuredProducts = \App\Models\Product::published()
+            ->verifiedSuppliers()
+            ->orderByNewest()
+            ->limit(12)
+            ->get();
+    } catch (\Exception $e) {
+        // If products table doesn't exist, use empty collection
+        $featuredProducts = collect([]);
+    }
     
     return view('public.home', compact('categories', 'featuredProducts'));
 })->name('home');
