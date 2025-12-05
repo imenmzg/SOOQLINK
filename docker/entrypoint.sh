@@ -106,27 +106,8 @@ if [ ! -z "$DB_HOST" ]; then
     echo "📊 Migration status:"
     php artisan migrate:status 2>&1 | head -30 || echo "⚠️  Could not check migration status"
     
-    # Ensure cache table exists (for rate limiting)
-    echo "🔍 Checking cache table..."
-    php artisan tinker --execute="
-        try {
-            DB::select('SELECT 1 FROM cache LIMIT 1');
-            echo 'Cache table exists';
-        } catch (\Exception \$e) {
-            echo 'Cache table missing - creating...';
-            Schema::create('cache', function (\$table) {
-                \$table->string('key')->primary();
-                \$table->mediumText('value');
-                \$table->integer('expiration');
-            });
-            Schema::create('cache_locks', function (\$table) {
-                \$table->string('key')->primary();
-                \$table->string('owner');
-                \$table->integer('expiration');
-            });
-            echo 'Cache tables created';
-        }
-    " 2>&1 || echo "⚠️  Cache table check failed (using file cache instead)"
+    # Note: Cache table will be created by migration if needed
+    # We use file cache by default, so cache table is optional
 fi
 
 # Test database connection before caching
