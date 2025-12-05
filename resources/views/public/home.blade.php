@@ -43,33 +43,15 @@
                     <!-- Stats - Compact Inline -->
                     <div class="flex flex-wrap items-center gap-4 pt-2">
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-sm border transition-all hover:shadow-md" style="border-color: rgba(50, 167, 226, 0.15);">
-                            <span class="text-2xl font-bold" style="color: #32A7E2;">
-                                @try
-                                    {{ \App\Models\Supplier::verified()->count() }}+
-                                @catch(\Exception $e)
-                                    0+
-                                @endtry
-                            </span>
+                            <span class="text-2xl font-bold" style="color: #32A7E2;">{{ ($suppliersCount ?? 0) }}+</span>
                             <span class="text-sm text-slate-600 font-medium">{{ __('home.hero_verified_suppliers') }}</span>
                         </div>
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-sm border transition-all hover:shadow-md" style="border-color: rgba(111, 194, 66, 0.15);">
-                            <span class="text-2xl font-bold" style="color: #6FC242;">
-                                @try
-                                    {{ \App\Models\Product::published()->count() }}+
-                                @catch(\Exception $e)
-                                    0+
-                                @endtry
-                            </span>
+                            <span class="text-2xl font-bold" style="color: #6FC242;">{{ ($productsCount ?? 0) }}+</span>
                             <span class="text-sm text-slate-600 font-medium">{{ __('home.hero_available_products') }}</span>
                         </div>
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-sm border transition-all hover:shadow-md" style="border-color: rgba(50, 167, 226, 0.15);">
-                            <span class="text-2xl font-bold" style="color: #32A7E2;">
-                                @try
-                                    {{ \App\Models\Category::active()->count() }}
-                                @catch(\Exception $e)
-                                    0
-                                @endtry
-                            </span>
+                            <span class="text-2xl font-bold" style="color: #32A7E2;">{{ ($categoriesCount ?? 0) }}</span>
                             <span class="text-sm text-slate-600 font-medium">{{ __('home.hero_main_categories') }}</span>
                         </div>
                     </div>

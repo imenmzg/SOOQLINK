@@ -32,7 +32,26 @@ Route::get('/', function () {
         $featuredProducts = collect([]);
     }
     
-    return view('public.home', compact('categories', 'featuredProducts'));
+    // Safely get counts for stats
+    try {
+        $suppliersCount = \App\Models\Supplier::verified()->count();
+    } catch (\Exception $e) {
+        $suppliersCount = 0;
+    }
+    
+    try {
+        $productsCount = \App\Models\Product::published()->count();
+    } catch (\Exception $e) {
+        $productsCount = 0;
+    }
+    
+    try {
+        $categoriesCount = \App\Models\Category::active()->count();
+    } catch (\Exception $e) {
+        $categoriesCount = 0;
+    }
+    
+    return view('public.home', compact('categories', 'featuredProducts', 'suppliersCount', 'productsCount', 'categoriesCount'));
 })->name('home');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
