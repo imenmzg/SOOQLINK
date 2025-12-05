@@ -159,78 +159,90 @@
             <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">{{ __('home.browse_subtitle') }}</p>
                 </div>
                 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @php
-                $categoryIcons = [
-                    'مواد البناء' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>',
-                    'الأجهزة الإلكترونية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>',
-                    'الأثاث' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>',
-                    'الملابس والنسيج' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>',
-                    'المواد الغذائية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>',
-                    'السيارات وقطع الغيار' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>',
-                    'الأدوات المكتبية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>',
-                    'المنتجات الطبية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>',
-                    'المنتجات الزراعية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>',
-                    'أخرى' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>',
-                ];
-            @endphp
-            @foreach($categories as $index => $category)
+        @if($categories && $categories->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @php
-                    $icon = $categoryIcons[$category->name] ?? '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>';
-                    $isBlue = $index % 2 == 0;
-                    $bgColor = $isBlue ? '#32A7E2' : '#6FC242';
-                    $darkColor = $isBlue ? '#1B4B72' : '#4A9D2F';
-                    $staggerClass = 'stagger-' . (($index % 6) + 1);
+                    $categoryIcons = [
+                        'مواد البناء' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>',
+                        'الأجهزة الإلكترونية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>',
+                        'الأثاث' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>',
+                        'الملابس والنسيج' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>',
+                        'المواد الغذائية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>',
+                        'السيارات وقطع الغيار' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>',
+                        'الأدوات المكتبية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>',
+                        'المنتجات الطبية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>',
+                        'المنتجات الزراعية' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>',
+                        'أخرى' => '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>',
+                    ];
                 @endphp
-                <a 
-                    href="{{ route('products.index', ['category' => $category->id]) }}" 
-                    class="animate-on-scroll {{ $staggerClass }} group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-200 hover:border-transparent hover:scale-105"
-                >
-                    <!-- SOOQLINK Colored Background on Hover -->
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(135deg, {{ $bgColor }}, {{ $darkColor }});"></div>
-                    
-                    <!-- Content Layout -->
-                    <div class="relative flex items-start gap-6">
-                        <!-- Icon Container -->
-                        <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300" style="background: linear-gradient(135deg, {{ $bgColor }}, {{ $darkColor }});">
-                                {!! $icon !!}
-                    </div>
-                </div>
-                
-                        <!-- Text Content -->
-                        <div class="flex-1 min-w-0">
-                            <h3 class="font-bold text-xl mb-2 text-slate-900 group-hover:text-white transition-colors duration-300">
-                                {{ $category->name }}
-                            </h3>
-                            @if($category->description)
-                                <p class="text-sm text-slate-600 group-hover:text-white/80 transition-colors duration-300 mb-3 line-clamp-2">
-                                    {{ $category->description }}
-                                </p>
-                            @endif
-                            <div class="flex items-center gap-3">
-                                <div class="flex items-center gap-2 text-sm text-slate-600 group-hover:text-white/90 transition-colors duration-300">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                        </svg>
-                                    <span class="font-semibold">{{ $category->products()->count() }} {{ __('home.products_count') }}</span>
-            </div>
-                    </div>
-                </div>
-                
-                        <!-- Arrow Icon -->
-                        <div class="flex-shrink-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                        </svg>
-                    </div>
-                </div>
-                
-                    <!-- Bottom Accent Line -->
-                    <div class="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to left, {{ $bgColor }}, {{ $darkColor }});"></div>
+                @foreach($categories as $index => $category)
+                    @php
+                        $categoryName = is_string($category->name) ? $category->name : ($category->name[app()->getLocale()] ?? $category->name['ar'] ?? '');
+                        $icon = $categoryIcons[$categoryName] ?? '<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>';
+                        $isBlue = $index % 2 == 0;
+                        $bgColor = $isBlue ? '#32A7E2' : '#6FC242';
+                        $darkColor = $isBlue ? '#1B4B72' : '#4A9D2F';
+                        $staggerClass = 'stagger-' . (($index % 6) + 1);
+                        try {
+                            $productsCount = $category->products()->count();
+                        } catch (\Exception $e) {
+                            $productsCount = 0;
+                        }
+                    @endphp
+                    <a 
+                        href="{{ route('products.index', ['category' => $category->id]) }}" 
+                        class="animate-on-scroll {{ $staggerClass }} group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-200 hover:border-transparent hover:scale-105"
+                    >
+                        <!-- SOOQLINK Colored Background on Hover -->
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(135deg, {{ $bgColor }}, {{ $darkColor }});"></div>
+                        
+                        <!-- Content Layout -->
+                        <div class="relative flex items-start gap-6">
+                            <!-- Icon Container -->
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300" style="background: linear-gradient(135deg, {{ $bgColor }}, {{ $darkColor }});">
+                                    {!! $icon !!}
+                                </div>
+                            </div>
+                            
+                            <!-- Text Content -->
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-xl mb-2 text-slate-900 group-hover:text-white transition-colors duration-300">
+                                    {{ $category->name }}
+                                </h3>
+                                @if($category->description)
+                                    <p class="text-sm text-slate-600 group-hover:text-white/80 transition-colors duration-300 mb-3 line-clamp-2">
+                                        {{ $category->description }}
+                                    </p>
+                                @endif
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center gap-2 text-sm text-slate-600 group-hover:text-white/90 transition-colors duration-300">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                                        </svg>
+                                        <span class="font-semibold">{{ $productsCount }} {{ __('home.products_count') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow Icon -->
+                            <div class="flex-shrink-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom Accent Line -->
+                        <div class="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to left, {{ $bgColor }}, {{ $darkColor }});"></div>
                     </a>
                 @endforeach
             </div>
+        @else
+            <div class="text-center py-12">
+                <p class="text-slate-600">{{ __('home.no_categories') }}</p>
+            </div>
+        @endif
         </div>
 
     <!-- Image Showcase Section - Modern Layout -->
