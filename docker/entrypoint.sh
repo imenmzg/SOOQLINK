@@ -18,18 +18,17 @@ chown -R www-data:www-data storage bootstrap/cache
 if [ ! -f .env ]; then
     echo "📝 Creating .env file from environment variables..."
     # Get APP_URL from environment or use default
-    APP_URL_VALUE=\${APP_URL:-https://sooqlink.onrender.com}
+    if [ -z "$APP_URL" ]; then
+        APP_URL_VALUE="https://sooqlink.onrender.com"
+    else
+        APP_URL_VALUE="$APP_URL"
+    fi
     cat > .env << EOF
 APP_NAME=\${APP_NAME:-SOOQLINK}
 APP_ENV=\${APP_ENV:-production}
 APP_KEY=\${APP_KEY:-}
 APP_DEBUG=\${APP_DEBUG:-false}
-APP_URL=\${APP_URL_VALUE}
-
-# Ensure APP_URL is set correctly for asset loading
-if [ -z "\${APP_URL}" ]; then
-    APP_URL_VALUE="https://sooqlink.onrender.com"
-fi
+APP_URL=$APP_URL_VALUE
 
 LOG_CHANNEL=stack
 LOG_LEVEL=debug
