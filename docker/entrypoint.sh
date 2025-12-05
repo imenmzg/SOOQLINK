@@ -23,7 +23,7 @@ if [ ! -f .env ]; then
 APP_NAME=\${APP_NAME:-SOOQLINK}
 APP_ENV=\${APP_ENV:-production}
 APP_KEY=\${APP_KEY:-}
-APP_DEBUG=\${APP_DEBUG:-true}
+APP_DEBUG=\${APP_DEBUG:-false}
 APP_URL=\${APP_URL_VALUE}
 
 LOG_CHANNEL=stack
@@ -103,7 +103,19 @@ if [ ! -z "$DB_HOST" ]; then
     php artisan tinker --execute="DB::connection()->getPdo(); echo 'Database connected!';" || echo "⚠️  Database connection test failed"
 fi
 
-# Cache configuration for production (after migrations)
+# Publish Filament assets FIRST (before caching)
+echo "🎨 Publishing Filament assets..."
+php artisan filament:assets --force 2>&1 || echo "⚠️  Filament assets publish failed"
+
+# Clear Filament cache to ensure fresh asset loading
+echo "🧹 Clearing Filament component cache..."
+php artisan filament:cache-components 2>&1 || echo "⚠️  Filament cache clear failed"
+
+# Create storage link
+echo "🔗 Creating storage link..."
+php artisan storage:link || echo "⚠️  Storage link already exists"
+
+# Cache configuration for production (after migrations and asset publishing)
 echo "⚡ Caching configuration..."
 # Don't cache config if APP_DEBUG is true (helps with debugging)
 if [ "$APP_DEBUG" != "true" ]; then
@@ -114,14 +126,6 @@ else
     echo "⚠️  Skipping config cache (APP_DEBUG=true for debugging)"
     php artisan config:clear || true
 fi
-
-# Create storage link
-echo "🔗 Creating storage link..."
-php artisan storage:link || echo "⚠️  Storage link already exists"
-
-# Publish Filament assets (for login/register pages)
-echo "🎨 Publishing Filament assets..."
-php artisan filament:assets 2>&1 || echo "⚠️  Filament assets publish failed (might already be published)"
 
 # Ensure public assets are accessible
 echo "📦 Ensuring public assets are accessible..."
