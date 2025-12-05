@@ -137,7 +137,7 @@ fi
 
 # Publish Filament assets FIRST (before caching)
 echo "🎨 Publishing Filament assets..."
-php artisan filament:assets --force 2>&1 || echo "⚠️  Filament assets publish failed"
+php artisan filament:assets 2>&1 || echo "⚠️  Filament assets publish failed"
 
 # Clear Filament cache to ensure fresh asset loading
 echo "🧹 Clearing Filament component cache..."
