@@ -21,11 +21,12 @@ if [ ! -f .env ]; then
 APP_NAME=\${APP_NAME:-SOOQLINK}
 APP_ENV=\${APP_ENV:-production}
 APP_KEY=\${APP_KEY:-}
-APP_DEBUG=\${APP_DEBUG:-false}
+APP_DEBUG=\${APP_DEBUG:-true}
 APP_URL=\${APP_URL:-http://localhost}
 
 LOG_CHANNEL=stack
 LOG_LEVEL=debug
+LOG_DEPRECATIONS_CHANNEL=null
 
 DB_CONNECTION=\${DB_CONNECTION:-mysql}
 DB_HOST=\${DB_HOST:-127.0.0.1}
@@ -36,7 +37,11 @@ DB_PASSWORD=\${DB_PASSWORD:-}
 
 CACHE_DRIVER=\${CACHE_DRIVER:-file}
 SESSION_DRIVER=\${SESSION_DRIVER:-file}
+SESSION_LIFETIME=120
 QUEUE_CONNECTION=\${QUEUE_CONNECTION:-sync}
+
+BROADCAST_DRIVER=log
+FILESYSTEM_DISK=local
 EOF
 fi
 
@@ -76,11 +81,23 @@ if [ ! -z "$DB_HOST" ]; then
     }
 fi
 
+# Test database connection before caching
+if [ ! -z "$DB_HOST" ]; then
+    echo "🔍 Testing database connection..."
+    php artisan tinker --execute="DB::connection()->getPdo(); echo 'Database connected!';" || echo "⚠️  Database connection test failed"
+fi
+
 # Cache configuration for production (after migrations)
 echo "⚡ Caching configuration..."
-php artisan config:cache || true
-php artisan route:cache || true
-php artisan view:cache || true
+# Don't cache config if APP_DEBUG is true (helps with debugging)
+if [ "$APP_DEBUG" != "true" ]; then
+    php artisan config:cache || true
+    php artisan route:cache || true
+    php artisan view:cache || true
+else
+    echo "⚠️  Skipping config cache (APP_DEBUG=true for debugging)"
+    php artisan config:clear || true
+fi
 
 # Create storage link
 echo "🔗 Creating storage link..."
