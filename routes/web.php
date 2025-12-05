@@ -87,7 +87,14 @@ Route::get('/suppliers', function (\Illuminate\Http\Request $request) {
         $suppliers = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 12, 1);
     }
     
-    return view('public.suppliers.index', compact('suppliers'));
+    // Safely get products count for stats
+    try {
+        $productsCount = \App\Models\Product::published()->verifiedSuppliers()->count();
+    } catch (\Exception $e) {
+        $productsCount = 0;
+    }
+    
+    return view('public.suppliers.index', compact('suppliers', 'productsCount'));
 })->name('suppliers.index');
 
 Route::get('/supplier/{id}', function ($id) {

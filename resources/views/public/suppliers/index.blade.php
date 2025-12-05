@@ -60,7 +60,7 @@
                     </div>
                     <div class="h-12 w-px bg-gray-200"></div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold" style="color: #6FC242;">{{ \App\Models\Product::published()->verifiedSuppliers()->count() }}</div>
+                        <div class="text-2xl font-bold" style="color: #6FC242;">{{ $productsCount ?? 0 }}</div>
                         <div class="text-xs text-gray-600">{{ __('products.available') }}</div>
                     </div>
                 </div>
