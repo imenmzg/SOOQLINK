@@ -8,7 +8,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
-use App\Filament\Pages\Supplier\Register as RegisterSupplier;
 use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -26,7 +25,7 @@ class SupplierPanelProvider extends PanelProvider
             ->id('supplier')
             ->path('supplier')
             ->login()
-            ->registration(RegisterSupplier::class)
+            ->registration(\App\Filament\Pages\Supplier\RegisterSupplier::class)
             ->colors([
                 'primary' => Color::hex('#32A7E2'),
             ])
